@@ -2,6 +2,8 @@
 
 namespace Encore\Admin\Controllers;
 
+use Illuminate\Http\Request;
+
 trait ModelForm
 {
     /**
@@ -55,7 +57,7 @@ trait ModelForm
      *
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(Request $request)
     {
         return $this->form()->store();
     }

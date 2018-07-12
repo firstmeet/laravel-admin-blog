@@ -17,4 +17,5 @@ Route::group([
     $router->group(['prefix'=>'api','namespace'=>'api'],function(Router $router){
         $router->get('/spec_group','SkuSpecGroupController@index');
     });
+    $router->resource('sku',SkuController::class);
 });

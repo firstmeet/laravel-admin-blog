@@ -338,9 +338,12 @@ class ComposerStaticInit1f371a7bb1a88f9f2a9d7308d4f8708e
     public static $classMap = array (
         'App\\Admin\\Controllers\\ExampleController' => __DIR__ . '/../..' . '/app/Admin/Controllers/ExampleController.php',
         'App\\Admin\\Controllers\\GoodController' => __DIR__ . '/../..' . '/app/Admin/Controllers/GoodController.php',
-        'App\\Admin\\Controllers\\GoodStockController' => __DIR__ . '/../..' . '/app/Admin/Controllers/GoodStockController.php',
         'App\\Admin\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Admin/Controllers/HomeController.php',
+        'App\\Admin\\Controllers\\SkuController' => __DIR__ . '/../..' . '/app/Admin/Controllers/SkuController.php',
+        'App\\Admin\\Controllers\\SkuSpecController' => __DIR__ . '/../..' . '/app/Admin/Controllers/SkuSpecController.php',
+        'App\\Admin\\Controllers\\SkuSpecGroupController' => __DIR__ . '/../..' . '/app/Admin/Controllers/SkuSpecGroupController.php',
         'App\\Admin\\Controllers\\StockController' => __DIR__ . '/../..' . '/app/Admin/Controllers/StockController.php',
+        'App\\Admin\\Controllers\\api\\SkuSpecGroupController' => __DIR__ . '/../..' . '/app/Admin/Controllers/api/SkuSpecGroupController.php',
         'App\\Admin\\Extensions\\WangEditor' => __DIR__ . '/../..' . '/app/Admin/Extensions/WangEditor.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',

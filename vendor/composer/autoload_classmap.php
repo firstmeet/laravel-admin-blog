@@ -8,9 +8,12 @@ $baseDir = dirname($vendorDir);
 return array(
     'App\\Admin\\Controllers\\ExampleController' => $baseDir . '/app/Admin/Controllers/ExampleController.php',
     'App\\Admin\\Controllers\\GoodController' => $baseDir . '/app/Admin/Controllers/GoodController.php',
-    'App\\Admin\\Controllers\\GoodStockController' => $baseDir . '/app/Admin/Controllers/GoodStockController.php',
     'App\\Admin\\Controllers\\HomeController' => $baseDir . '/app/Admin/Controllers/HomeController.php',
+    'App\\Admin\\Controllers\\SkuController' => $baseDir . '/app/Admin/Controllers/SkuController.php',
+    'App\\Admin\\Controllers\\SkuSpecController' => $baseDir . '/app/Admin/Controllers/SkuSpecController.php',
+    'App\\Admin\\Controllers\\SkuSpecGroupController' => $baseDir . '/app/Admin/Controllers/SkuSpecGroupController.php',
     'App\\Admin\\Controllers\\StockController' => $baseDir . '/app/Admin/Controllers/StockController.php',
+    'App\\Admin\\Controllers\\api\\SkuSpecGroupController' => $baseDir . '/app/Admin/Controllers/api/SkuSpecGroupController.php',
     'App\\Admin\\Extensions\\WangEditor' => $baseDir . '/app/Admin/Extensions/WangEditor.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',

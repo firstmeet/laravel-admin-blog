@@ -3,13 +3,12 @@
 namespace App\Admin\Controllers;
 
 use App\Good;
-
-use Encore\Admin\Form;
-use Encore\Admin\Grid;
-use Encore\Admin\Facades\Admin;
-use Encore\Admin\Layout\Content;
 use App\Http\Controllers\Controller;
 use Encore\Admin\Controllers\ModelForm;
+use Encore\Admin\Facades\Admin;
+use Encore\Admin\Form;
+use Encore\Admin\Grid;
+use Encore\Admin\Layout\Content;
 
 class GoodController extends Controller
 {
@@ -26,7 +25,6 @@ class GoodController extends Controller
 
             $content->header('拼团');
             $content->description('商品列表');
-            $content->row('<form><input style="width: 160px" id="start_time" name="start_time" value="" class="form-control start_time" placeholder="Input 开始时间" type="text"></form>');
             $content->body($this->grid());
 
         });
@@ -84,15 +82,21 @@ class GoodController extends Controller
             $grid->end_time("结束时间");
             $grid->active_valid_hours("有效时间");
             $grid->can_active_number("可开团数量");
-            $grid->picture("封面")->image('http://blog.example/uploads/',100,100);
+            $grid->picture("封面")->image(env("APP_URL").'/uploads/',100,100);
             $grid->sort("排序")->editable();
             $grid->status("状态")->radio([
                 1=>'未启用',
                 2=>'已启用'
             ]);
 
+
             $grid->created_at("创建时间");
             $grid->updated_at("更新时间");
+            $grid->actions(function ($actions)use($grid) {
+
+                // append一个操作
+                $actions->append('<a href='.\url('admin/sku?goods_id='.$actions->getKey()).'><i class="fa fa-eye"></i></a>');
+            });
         });
     }
 
@@ -106,9 +110,15 @@ class GoodController extends Controller
         return Admin::form(Good::class, function (Form $form) {
 
             $form->display('id', 'ID');
-            $form->text('goods_name','商品名称');
-            $form->textarea("description",'商品描述');
-            $form->number('stock_number','库存数量');
+            $form->text('goods_name','商品名称')->rules("required",[
+                "required"=>'请输入商品价格'
+            ]);
+            $form->textarea("description",'商品描述')->rules("required",[
+                "required"=>'请输入商品描述'
+            ]);
+            $form->number('stock_number','库存数量')->rules("required",[
+                "required"=>'请输入库存数量'
+            ]);
             $form->text('active_price','拼团价格');
             $form->text('single_price','单独购买价格');
             $form->number('active_man_number','拼团人数');
