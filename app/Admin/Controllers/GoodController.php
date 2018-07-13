@@ -4,6 +4,7 @@ namespace App\Admin\Controllers;
 
 use App\Good;
 use App\Http\Controllers\Controller;
+use App\SkuSpecGroup;
 use Encore\Admin\Controllers\ModelForm;
 use Encore\Admin\Facades\Admin;
 use Encore\Admin\Form;
@@ -119,6 +120,8 @@ class GoodController extends Controller
             $form->number('stock_number','库存数量')->rules("required",[
                 "required"=>'请输入库存数量'
             ]);
+            $spec_groups_options=SkuSpecGroup::whereStatus(2)->pluck('name','id');
+            $form->checkbox('spec_groups',"选择需要的规格组")->options($spec_groups_options)->stacked();
             $form->text('active_price','拼团价格');
             $form->text('single_price','单独购买价格');
             $form->number('active_man_number','拼团人数');
