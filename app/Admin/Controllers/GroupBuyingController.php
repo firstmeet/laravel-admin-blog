@@ -74,13 +74,26 @@ class GroupBuyingController extends Controller
         return Admin::grid(GroupBuying::class, function (Grid $grid) {
 
             $grid->id('ID')->sortable();
-            $grid->group_id("团id");
+            $grid->group_id("团编码");
             $grid->column("团长名称")->display(function (){
                 return $this->user()->name;
             });
             $grid->current_size("当前人数");
             $grid->group_size("团最大人数");
             $grid->exp_time("过期时间");
+            $grid->status("团状态")->display(function (){
+               switch ($this->status){
+                   case '0':
+                       return "失败";
+                       break;
+                   case '1':
+                       return "开团成功,待拼团";
+                       break;
+                   case '2':
+                       return "团已完成";
+                       break;
+               }
+            });
             $grid->created_at();
         });
     }
