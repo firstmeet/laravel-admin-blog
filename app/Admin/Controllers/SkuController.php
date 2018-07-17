@@ -142,6 +142,11 @@ class SkuController extends Controller
 
             $form->display('created_at', 'Created At');
             $form->display('updated_at', 'Updated At');
+            $form->tools(function (Form\Tools $tools) {
+                // 去掉跳转列表按钮
+                $tools->disableListButton();
+
+            });
             $form->saving(function (Form $form){
                $sku=array_filter($form->sku);
                $goods_id=$form->goods_id;
