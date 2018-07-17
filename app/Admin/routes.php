@@ -18,4 +18,5 @@ Route::group([
         $router->get('/spec_group','SkuSpecGroupController@index');
     });
     $router->resource('sku',SkuController::class);
+    $router->resource('group_buying',GroupbuyingController::class);
 });

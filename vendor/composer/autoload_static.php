@@ -338,7 +338,11 @@ class ComposerStaticInit1f371a7bb1a88f9f2a9d7308d4f8708e
     public static $classMap = array (
         'App\\Admin\\Controllers\\ExampleController' => __DIR__ . '/../..' . '/app/Admin/Controllers/ExampleController.php',
         'App\\Admin\\Controllers\\GoodController' => __DIR__ . '/../..' . '/app/Admin/Controllers/GoodController.php',
+        'App\\Admin\\Controllers\\GroupBuyingController' => __DIR__ . '/../..' . '/app/Admin/Controllers/GroupBuyingController.php',
+        'App\\Admin\\Controllers\\GroupBuyingSubController' => __DIR__ . '/../..' . '/app/Admin/Controllers/GroupBuyingSubController.php',
         'App\\Admin\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Admin/Controllers/HomeController.php',
+        'App\\Admin\\Controllers\\OrderController' => __DIR__ . '/../..' . '/app/Admin/Controllers/OrderController.php',
+        'App\\Admin\\Controllers\\OrderDetailController' => __DIR__ . '/../..' . '/app/Admin/Controllers/OrderDetailController.php',
         'App\\Admin\\Controllers\\SkuController' => __DIR__ . '/../..' . '/app/Admin/Controllers/SkuController.php',
         'App\\Admin\\Controllers\\SkuSpecController' => __DIR__ . '/../..' . '/app/Admin/Controllers/SkuSpecController.php',
         'App\\Admin\\Controllers\\SkuSpecGroupController' => __DIR__ . '/../..' . '/app/Admin/Controllers/SkuSpecGroupController.php',

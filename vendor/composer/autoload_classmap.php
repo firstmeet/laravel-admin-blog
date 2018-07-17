@@ -8,7 +8,11 @@ $baseDir = dirname($vendorDir);
 return array(
     'App\\Admin\\Controllers\\ExampleController' => $baseDir . '/app/Admin/Controllers/ExampleController.php',
     'App\\Admin\\Controllers\\GoodController' => $baseDir . '/app/Admin/Controllers/GoodController.php',
+    'App\\Admin\\Controllers\\GroupBuyingController' => $baseDir . '/app/Admin/Controllers/GroupBuyingController.php',
+    'App\\Admin\\Controllers\\GroupBuyingSubController' => $baseDir . '/app/Admin/Controllers/GroupBuyingSubController.php',
     'App\\Admin\\Controllers\\HomeController' => $baseDir . '/app/Admin/Controllers/HomeController.php',
+    'App\\Admin\\Controllers\\OrderController' => $baseDir . '/app/Admin/Controllers/OrderController.php',
+    'App\\Admin\\Controllers\\OrderDetailController' => $baseDir . '/app/Admin/Controllers/OrderDetailController.php',
     'App\\Admin\\Controllers\\SkuController' => $baseDir . '/app/Admin/Controllers/SkuController.php',
     'App\\Admin\\Controllers\\SkuSpecController' => $baseDir . '/app/Admin/Controllers/SkuSpecController.php',
     'App\\Admin\\Controllers\\SkuSpecGroupController' => $baseDir . '/app/Admin/Controllers/SkuSpecGroupController.php',
