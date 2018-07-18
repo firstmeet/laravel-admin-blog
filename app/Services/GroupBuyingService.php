@@ -9,6 +9,7 @@
 namespace App\Services;
 
 
+use App\Address;
 use App\Good;
 use App\GroupBuying;
 use App\Sku;
@@ -25,6 +26,7 @@ class GroupBuyingService
         }else{
             $goods_info=Good::find($goods_id);
             $sku=Sku::where('sku_id',$sku_id)->first();
+            $address=Address::find($address_id);
             $group_create=[
                 'group_id'=>Uuid::uuid(),
                 'user_id'=>$user_id,
@@ -38,6 +40,13 @@ class GroupBuyingService
             $sub_create=[
                 'group_id'=>$result->group_id,
                 'stocks_name'=>$sku->sku,
+                'sku_id'=>$sku_id,
+                'province_id'=>$address->province,
+                'city_id'=>$address->city,
+                'county_id'=>$address->county,
+                'address'=>$address->address,
+                'phone'=>$address->phone_number,
+                'consignee_name'=>$address->consignee_name
             ];
         }
     }

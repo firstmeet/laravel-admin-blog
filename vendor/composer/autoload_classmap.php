@@ -20,6 +20,7 @@ return array(
     'App\\Admin\\Controllers\\StockController' => $baseDir . '/app/Admin/Controllers/StockController.php',
     'App\\Admin\\Controllers\\api\\SkuSpecGroupController' => $baseDir . '/app/Admin/Controllers/api/SkuSpecGroupController.php',
     'App\\Admin\\Extensions\\WangEditor' => $baseDir . '/app/Admin/Extensions/WangEditor.php',
+    'App\\City' => $baseDir . '/app/City.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Good' => $baseDir . '/app/Good.php',
