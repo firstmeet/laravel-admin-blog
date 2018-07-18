@@ -21,4 +21,5 @@ Route::post('register', 'api\PassportController@register');
 
 Route::group(['middleware' => 'auth:api'], function(){
     Route::post('get-details', 'api\PassportController@getDetails');
+    Route::resource('group','api\GroupBuyingController');
 });
