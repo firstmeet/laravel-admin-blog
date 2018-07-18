@@ -22,6 +22,8 @@ class CreateAddressesTable extends Migration
             $table->integer('county');
             $table->string('phone_number')->comment("联系方式");
             $table->string('consignee_name')->comment("收货人姓名");
+            $table->tinyInteger("default")->default(0)->comment("默认地址");
+            $table->tinyInteger("pick")->default(0)->comment("选中地址");
             $table->timestamps();
             $table->softDeletes();
         });
