@@ -84,18 +84,7 @@ class SkuController extends Controller
             $grid->model()->where('goods_id',\Illuminate\Support\Facades\Request::get('goods_id'));
             $grid->id('ID')->sortable();
             $grid->sku_id('SKU_ID');
-            $grid->sku('所选规格')->display(function ($sku) {
-                $arr=json_decode($sku);
-                $arr2=[];
-                foreach ($arr as $key=>$value){
-                    $str_arr=explode(':',$value);
-                    $spec_group=SkuSpecGroup::find($str_arr[0]);
-                    $spec=SkuSpec::find($str_arr[1]);
-                    $str=$spec_group->name.':'.$spec->name;
-                    array_push($arr2,$str);
-                }
-                return implode(';',$arr2);
-            });
+            $grid->sku('所选规格');
             $grid->stock_number("库存数量");
             $grid->active_price('拼团价')->editable();
             $grid->single_price('单独购买价')->editable();

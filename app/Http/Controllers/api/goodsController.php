@@ -2,24 +2,26 @@
 
 namespace App\Http\Controllers\api;
 
-use App\Repositories\GroupBuyingInterface;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Validator;
 
-class GroupBuyingController extends Controller
+class goodsController extends Controller
 {
-    protected $group;
-    public function __construct(GroupBuyingInterface $group)
+    protected $goods;
+    public function __construct()
     {
-        $this->group=$group;
+
     }
 
     public function index(Request $request)
     {
-        return response()->json($this->group->with(['goods'])->paginate($request->get('item',10)));
+        return response()->json($this->goods->paginate($request->get('item',10)));
     }
     public function edit($id)
+    {
+
+    }
+    public function show($id)
     {
 
     }
@@ -46,5 +48,4 @@ class GroupBuyingController extends Controller
     {
 
     }
-
 }

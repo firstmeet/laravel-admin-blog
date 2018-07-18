@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\Address' => $baseDir . '/app/Address.php',
     'App\\Admin\\Controllers\\ExampleController' => $baseDir . '/app/Admin/Controllers/ExampleController.php',
     'App\\Admin\\Controllers\\GoodController' => $baseDir . '/app/Admin/Controllers/GoodController.php',
     'App\\Admin\\Controllers\\GroupBuyingController' => $baseDir . '/app/Admin/Controllers/GroupBuyingController.php',
@@ -32,6 +33,8 @@ return array(
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\api\\GroupBuyingController' => $baseDir . '/app/Http/Controllers/api/GroupBuyingController.php',
     'App\\Http\\Controllers\\api\\PassportController' => $baseDir . '/app/Http/Controllers/api/PassportController.php',
+    'App\\Http\\Controllers\\api\\goodsController' => $baseDir . '/app/Http/Controllers/api/goodsController.php',
+    'App\\Http\\Controllers\\goodsController' => $baseDir . '/app/Http/Controllers/goodsController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
     'App\\Http\\Middleware\\EncryptCookies' => $baseDir . '/app/Http/Middleware/EncryptCookies.php',
     'App\\Http\\Middleware\\RedirectIfAuthenticated' => $baseDir . '/app/Http/Middleware/RedirectIfAuthenticated.php',
@@ -45,8 +48,13 @@ return array(
     'App\\Providers\\AuthServiceProvider' => $baseDir . '/app/Providers/AuthServiceProvider.php',
     'App\\Providers\\BroadcastServiceProvider' => $baseDir . '/app/Providers/BroadcastServiceProvider.php',
     'App\\Providers\\EventServiceProvider' => $baseDir . '/app/Providers/EventServiceProvider.php',
+    'App\\Providers\\GroupProvider' => $baseDir . '/app/Providers/GroupProvider.php',
     'App\\Providers\\RouteServiceProvider' => $baseDir . '/app/Providers/RouteServiceProvider.php',
     'App\\Repositories\\GroupBuyingInterface' => $baseDir . '/app/Repositories/GroupBuyingInterface.php',
+    'App\\Repositories\\GroupBuyingRepository' => $baseDir . '/app/Repositories/GroupBuyingRepository.php',
+    'App\\Repositories\\GroupBuyingSubInterface' => $baseDir . '/app/Repositories/GroupBuyingSubInterface.php',
+    'App\\Repositories\\GroupBuyingSubRepository' => $baseDir . '/app/Repositories/GroupBuyingSubRepository.php',
+    'App\\Services\\GroupBuyingService' => $baseDir . '/app/Services/GroupBuyingService.php',
     'App\\Sku' => $baseDir . '/app/Sku.php',
     'App\\SkuSpec' => $baseDir . '/app/SkuSpec.php',
     'App\\SkuSpecGroup' => $baseDir . '/app/SkuSpecGroup.php',

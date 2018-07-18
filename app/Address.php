@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class GroupBuyingSub extends Model
+class Address extends Model
 {
-    protected $guarded=[];
+    //
 }

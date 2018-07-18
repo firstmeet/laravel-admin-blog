@@ -9,13 +9,13 @@
 namespace App\Repositories;
 
 
-use App\GroupBuying;
+use App\GroupBuyingSub;
 
-class GroupBuyingRepository implements GroupBuyingInterface
+class GroupBuyingSubRepository implements GroupBuyingInterface
 {
     protected $where=[];
     protected $with=[];
-    protected $model=GroupBuying::class;
+    protected $model=GroupBuyingSub::class;
     public function find($id)
     {
         if ($this->with){

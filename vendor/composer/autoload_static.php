@@ -419,6 +419,7 @@ class ComposerStaticInit1f371a7bb1a88f9f2a9d7308d4f8708e
     );
 
     public static $classMap = array (
+        'App\\Address' => __DIR__ . '/../..' . '/app/Address.php',
         'App\\Admin\\Controllers\\ExampleController' => __DIR__ . '/../..' . '/app/Admin/Controllers/ExampleController.php',
         'App\\Admin\\Controllers\\GoodController' => __DIR__ . '/../..' . '/app/Admin/Controllers/GoodController.php',
         'App\\Admin\\Controllers\\GroupBuyingController' => __DIR__ . '/../..' . '/app/Admin/Controllers/GroupBuyingController.php',
@@ -445,6 +446,8 @@ class ComposerStaticInit1f371a7bb1a88f9f2a9d7308d4f8708e
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\api\\GroupBuyingController' => __DIR__ . '/../..' . '/app/Http/Controllers/api/GroupBuyingController.php',
         'App\\Http\\Controllers\\api\\PassportController' => __DIR__ . '/../..' . '/app/Http/Controllers/api/PassportController.php',
+        'App\\Http\\Controllers\\api\\goodsController' => __DIR__ . '/../..' . '/app/Http/Controllers/api/goodsController.php',
+        'App\\Http\\Controllers\\goodsController' => __DIR__ . '/../..' . '/app/Http/Controllers/goodsController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
         'App\\Http\\Middleware\\RedirectIfAuthenticated' => __DIR__ . '/../..' . '/app/Http/Middleware/RedirectIfAuthenticated.php',
@@ -458,8 +461,13 @@ class ComposerStaticInit1f371a7bb1a88f9f2a9d7308d4f8708e
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
         'App\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EventServiceProvider.php',
+        'App\\Providers\\GroupProvider' => __DIR__ . '/../..' . '/app/Providers/GroupProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
         'App\\Repositories\\GroupBuyingInterface' => __DIR__ . '/../..' . '/app/Repositories/GroupBuyingInterface.php',
+        'App\\Repositories\\GroupBuyingRepository' => __DIR__ . '/../..' . '/app/Repositories/GroupBuyingRepository.php',
+        'App\\Repositories\\GroupBuyingSubInterface' => __DIR__ . '/../..' . '/app/Repositories/GroupBuyingSubInterface.php',
+        'App\\Repositories\\GroupBuyingSubRepository' => __DIR__ . '/../..' . '/app/Repositories/GroupBuyingSubRepository.php',
+        'App\\Services\\GroupBuyingService' => __DIR__ . '/../..' . '/app/Services/GroupBuyingService.php',
         'App\\Sku' => __DIR__ . '/../..' . '/app/Sku.php',
         'App\\SkuSpec' => __DIR__ . '/../..' . '/app/SkuSpec.php',
         'App\\SkuSpecGroup' => __DIR__ . '/../..' . '/app/SkuSpecGroup.php',

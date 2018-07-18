@@ -20,4 +20,17 @@ class Sku extends Model
             $this->attributes['sku'] = json_encode($arr);
         }
     }
+    public function getSkuAttribute($sku)
+    {
+        $arr=json_decode($sku);
+        $arr2=[];
+        foreach ($arr as $key=>$value){
+            $str_arr=explode(':',$value);
+            $spec_group=SkuSpecGroup::find($str_arr[0]);
+            $spec=SkuSpec::find($str_arr[1]);
+            $str=$spec_group->name.':'.$spec->name;
+            array_push($arr2,$str);
+        }
+        return implode(';',$arr2);
+    }
 }

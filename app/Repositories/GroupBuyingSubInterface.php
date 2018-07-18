@@ -9,7 +9,7 @@
 namespace App\Repositories;
 
 
-interface GroupBuyingInterface
+interface GroupBuyingSubInterface
 {
      public function find($id);
      public function create($arr);
