@@ -4,18 +4,35 @@ namespace App\Http\Controllers\api;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Validator;
 
 class AliPayController extends Controller
 {
+    protected $config;
+    public function __construct()
+    {
+        $this->config=config('pay.alipay');
+    }
+
     public function index(Request $request)
     {
-
+        $validate=Validator::make($request->all(),[
+            'order_id'=>'required',
+            'type'=>'required'
+        ]);
+        if ($validate->fails()){
+            return response()->json($validate->errors(),403);
+        }
+        $order=[
+            'out_trade_no'=>$request->get('order_id'),
+//            'total_amount'=>
+        ];
       switch ($request->get('type')){
-          case 'alipay_web':
+          case 'web':
               break;
-          case 'alipay_wap':
+          case 'wap':
               break;
-          case 'alipay_app':
+          case 'app':
               break;
       }
     }
