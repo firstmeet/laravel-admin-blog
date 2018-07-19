@@ -9,13 +9,13 @@
 namespace App\Repositories;
 
 
-use App\GroupBuying;
+use App\Good;
 
-class GroupBuyingRepository implements GroupBuyingInterface
+class GoodsRepository implements GoodsInterface
 {
     protected $where=[];
     protected $with=[];
-    protected $model=GroupBuying::class;
+    protected $model=Good::class;
     public function find($id)
     {
         if ($this->with){
@@ -56,7 +56,7 @@ class GroupBuyingRepository implements GroupBuyingInterface
     public function getByWhere()
     {
         if (!$this->where){
-            if ($this->with){
+            if (!$this->with){
                 return $this->model::with($this->with)->where($this->where)->get();
             }else{
                 return $this->model::where($this->where)->get();

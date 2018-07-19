@@ -10,6 +10,7 @@ use Encore\Admin\Facades\Admin;
 use Encore\Admin\Layout\Content;
 use App\Http\Controllers\Controller;
 use Encore\Admin\Controllers\ModelForm;
+use function foo\func;
 
 class GroupBuyingController extends Controller
 {
@@ -75,9 +76,8 @@ class GroupBuyingController extends Controller
 
             $grid->id('ID')->sortable();
             $grid->group_id("团编码");
-            $grid->column("团长名称")->display(function (){
-                return $this->user()->name;
-            });
+            $grid->goods()->goods_name("拼团商品");
+            $grid->user()->name("团长名称");
             $grid->current_size("当前人数");
             $grid->group_size("团最大人数");
             $grid->exp_time("过期时间");
@@ -93,6 +93,9 @@ class GroupBuyingController extends Controller
                        return "团已完成";
                        break;
                }
+            });
+            $grid->actions(function ($actions){
+                $actions->append('<a href='.\url('admin/group_buying_sub?group_id='.$actions->row->group_id).' title="拼团人员"><i class="fa fa-align-justify"></i></a>');
             });
             $grid->created_at();
         });

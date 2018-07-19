@@ -2,20 +2,26 @@
 
 namespace App\Http\Controllers\api;
 
+use App\Http\Controllers\Controller;
+use App\Repositories\GoodsInterface;
 use App\Repositories\GroupBuyingInterface;
+use App\Repositories\GroupBuyingSubInterface;
 use App\Services\GroupBuyingService;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class GroupBuyingController extends Controller
 {
     protected $group;
+    protected $group_sub;
+    protected $goods;
     protected $service;
-    public function __construct(GroupBuyingInterface $group,GroupBuyingService $service)
+    public function __construct(GroupBuyingInterface $group,GroupBuyingService $service,GroupBuyingSubInterface $group_sub,GoodsInterface $goods)
     {
         $this->group=$group;
+        $this->group_sub=$group_sub;
+        $this->goods=$goods;
         $this->service=$service;
     }
 
@@ -40,10 +46,31 @@ class GroupBuyingController extends Controller
             'address_id'=>'required'
         ]);
         if ($validate->fails()){
-            return response()->json($validate->errors(),401);
+            return response()->json($validate->errors(),403);
         }
+
+        if ($request->get('group_id')){
+            $where=[
+                ['user_id','=',Auth::user()->id],
+                ['sku_id','=',$request->get('sku_id')]
+            ];
+            $find_group_sub=$this->group_sub->where($where)->findByWhere();
+            if ($find_group_sub){
+                return response()->json("您已参加此次拼团,请勿重复拼团",403);
+            }
+        }else{
+            $where=[
+                ['user_id','=',Auth::user()->id],
+                ['goods_id','=',$request->get('goods_id')]
+            ];
+            $find_group=$this->group->where($where)->findByWhere();
+            if ($find_group){
+                return response()->json("您已参加此次拼团,请勿重复拼团",403);
+            }
+
+        }
+
         $result=$this->service->create($request->get('goods_id'),$request->get('group_id'),$request->get('sku_id'),$request->get('address_id'),Auth::user()->id);
-        return response()->json($result,200);
         if ($result){
             return response()->json($result,200);
         }else{

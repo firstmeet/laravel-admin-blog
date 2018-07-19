@@ -2,8 +2,12 @@
 
 namespace App\Providers;
 
+use App\Repositories\GoodsInterface;
+use App\Repositories\GoodsRepository;
 use App\Repositories\GroupBuyingInterface;
 use App\Repositories\GroupBuyingRepository;
+use App\Repositories\GroupBuyingSubInterface;
+use App\Repositories\GroupBuyingSubRepository;
 use Illuminate\Support\ServiceProvider;
 
 class GroupProvider extends ServiceProvider
@@ -26,5 +30,7 @@ class GroupProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(GroupBuyingInterface::class,GroupBuyingRepository::class);
+        $this->app->bind(GroupBuyingSubInterface::class,GroupBuyingSubRepository::class);
+        $this->app->bind(GoodsInterface::class,GoodsRepository::class);
     }
 }

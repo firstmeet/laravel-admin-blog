@@ -11,7 +11,7 @@ namespace App\Repositories;
 
 use App\GroupBuyingSub;
 
-class GroupBuyingSubRepository implements GroupBuyingInterface
+class GroupBuyingSubRepository implements GroupBuyingSubInterface
 {
     protected $where=[];
     protected $with=[];
@@ -43,11 +43,11 @@ class GroupBuyingSubRepository implements GroupBuyingInterface
     }
     public function findByWhere()
     {
-        if (!$this->where){
+        if ($this->where){
             if (!$this->with){
-                return $this->model::with($this->with())->where($this->where())->first();
+                return $this->model::with($this->with)->where($this->where)->first();
             }else{
-                return $this->model::where($this->where())->first();
+                return $this->model::where($this->where)->first();
             }
         }else{
             throw new \Mockery\Exception("参数错误");
@@ -57,9 +57,9 @@ class GroupBuyingSubRepository implements GroupBuyingInterface
     {
         if (!$this->where){
             if (!$this->with){
-                return $this->model::with($this->with())->where($this->where())->get();
+                return $this->model::with($this->with)->where($this->where)->get();
             }else{
-                return $this->model::where($this->where())->get();
+                return $this->model::where($this->where)->get();
             }
         }else{
             throw new \Mockery\Exception("参数错误");

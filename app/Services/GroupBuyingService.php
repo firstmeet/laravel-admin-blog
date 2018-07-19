@@ -45,7 +45,8 @@ class GroupBuyingService
                 'order_id'=>date('YmdHis',time()).rand(1000,9999).$user_id,
                 'is_master'=>0,
                 'is_pay'=>0,
-                'status'=>0
+                'status'=>0,
+                'user_id'=>$user_id
 
             ];
             $sub_result=GroupBuyingSub::create($sub_create);
@@ -81,9 +82,10 @@ class GroupBuyingService
                     'consignee_name'=>$address->consignee_name,
                     'payment_amount'=>$sku->active_price,
                     'order_id'=>date('YmdHis',time()).rand(1000,9999).$user_id,
-                    'is_master'=>0,
+                    'is_master'=>1,
                     'is_pay'=>0,
-                    'status'=>0
+                    'status'=>0,
+                    'user_id'=>$user_id
                 ];
                 $sub_result=GroupBuyingSub::create($sub_create);
                 DB::commit();

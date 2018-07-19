@@ -22,7 +22,7 @@ class PassportController extends Controller
         ]);
 
         if ($validator->fails()) {
-              return response()->json($validator->errors(),401);
+              return response()->json($validator->errors(),403);
         }
          $user=User::create([
              'name'=>$request->name,
@@ -38,7 +38,7 @@ class PassportController extends Controller
             'password'=>'required|between:6,20',
         ]);
         if ($validator->fails()) {
-            return response()->json($validator->errors(),401);
+            return response()->json($validator->errors(),403);
         }
          if (Auth::attempt(['email'=>$request->email,'password'=>$request->password])){
              $user=Auth::user();
