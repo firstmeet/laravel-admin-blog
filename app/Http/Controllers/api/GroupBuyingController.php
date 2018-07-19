@@ -3,16 +3,20 @@
 namespace App\Http\Controllers\api;
 
 use App\Repositories\GroupBuyingInterface;
+use App\Services\GroupBuyingService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class GroupBuyingController extends Controller
 {
     protected $group;
-    public function __construct(GroupBuyingInterface $group)
+    protected $service;
+    public function __construct(GroupBuyingInterface $group,GroupBuyingService $service)
     {
         $this->group=$group;
+        $this->service=$service;
     }
 
     public function index(Request $request)
@@ -37,6 +41,13 @@ class GroupBuyingController extends Controller
         if ($validate->fails()){
             return response()->json($validate->errors(),401);
         }
+        $result=$this->service->create($request->get('goods_id'),$request->get('group_id'),$request->get('sku_id'),$request->get('address_id'),Auth::user()->id);
+        if ($result){
+            return response()->json($result,200);
+        }else{
+            return response()->json('failed',401);
+        }
+
     }
     public function update(Request $request,$id)
     {
