@@ -34,14 +34,16 @@ class GroupBuyingController extends Controller
     public function store(Request $request)
     {
         $validate=Validator::make($request->all(),[
-            'goods_id'=>'required_without|group_id',
-            'group_id'=>'required_without|goods_id',
-            'sku_id'=>'required'
+            'goods_id'=>'required_without:group_id',
+            'group_id'=>'required_without:goods_id',
+            'sku_id'=>'required',
+            'address_id'=>'required'
         ]);
         if ($validate->fails()){
             return response()->json($validate->errors(),401);
         }
         $result=$this->service->create($request->get('goods_id'),$request->get('group_id'),$request->get('sku_id'),$request->get('address_id'),Auth::user()->id);
+        return response()->json($result,200);
         if ($result){
             return response()->json($result,200);
         }else{
