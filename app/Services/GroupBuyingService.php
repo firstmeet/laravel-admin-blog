@@ -80,7 +80,7 @@ class GroupBuyingService
                     'address'=>$address->address,
                     'phone_number'=>$address->phone_number,
                     'consignee_name'=>$address->consignee_name,
-                    'payment_amount'=>$sku->active_price,
+                    'payment_amount'=>$sku->group_price,
                     'order_id'=>date('YmdHis',time()).rand(1000,9999).$user_id,
                     'is_master'=>1,
                     'is_pay'=>0,
