@@ -85,7 +85,7 @@ class OrderController extends Controller
                        break;
                }
             });
-            $grid->order_detail("商品")->pluck('goods_name','sku_name')->implode('-');
+            $grid->order_detail("商品")->pluck('goods_name')->implode(';');
             $grid->payment_amount("支付金额");
             $grid->freight("运费");
             $grid->is_pay("是否支付")->display(function (){
