@@ -23,7 +23,7 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::post('get-details', 'api\PassportController@getDetails');
     Route::resource('group','api\GroupBuyingController');
     Route::any('alipay','api\AliPayController@index');
-    Route::any('wechat_pay','api\WechatController@index');
+    Route::any('wechat_pay','api\WechatPayController@index');
 
 
 });
