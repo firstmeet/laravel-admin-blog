@@ -25,4 +25,8 @@ class GroupBuyingSub extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function group()
+    {
+        return $this->belongsTo(GroupBuying::class,'group_id','group_id');
+    }
 }

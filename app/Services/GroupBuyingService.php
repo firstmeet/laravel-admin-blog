@@ -13,6 +13,8 @@ use App\Address;
 use App\Good;
 use App\GroupBuying;
 use App\GroupBuyingSub;
+use App\Order;
+use App\OrderDetail;
 use App\Sku;
 use Faker\Provider\Uuid;
 use Illuminate\Support\Carbon;
@@ -98,5 +100,33 @@ class GroupBuyingService
 
 
         }
+    }
+    public function createGroupToOrder($order_id,$trade_no,$payment_type)
+    {
+        $group_sub=GroupBuyingSub::with(['group'=>function($query){
+            $query->with('goods');
+        }])->where('order_id',$order_id)->find();
+        $sku=Sku::where('sku_id',$group_sub->group->sku_id)->find();
+        $order_data=[
+            'order_id'=>$order_id,
+            'user_id'=>$group_sub->user_id,
+            'trade_no'=>$trade_no,
+            'type'=>1,
+            'payment_amount'=>$group_sub->payment_amount,
+            'pay_time'=>Carbon::now()->toDateTimeString(),
+            'is_pay'=>1,
+            'payment_type'=>$payment_type
+        ];
+        $order_result=Order::create($order_data);
+        $detail_data=[
+            'order_id'=>$order_id,
+            'goods_name'=>$group_sub->group->goods->goods_name,
+            'sku_id'=>$group_sub->sku_id,
+            'goods_id'=>$group_sub->group->goods_id,
+            'sku_name'=>$sku->sku,
+            'price'=>$group_sub->is_master?$sku->group_price:$sku->active_price,
+        ];
+        $detail_result=OrderDetail::create($detail_data);
+        Log::info('团购写入订单:'.$order_id);
     }
 }

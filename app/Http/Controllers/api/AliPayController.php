@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api;
 
 use App\Repositories\GroupBuyingSubInterface;
+use App\Services\GroupBuyingService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Validator;
@@ -13,10 +14,12 @@ class AliPayController extends Controller
 {
     protected $config;
     protected $group_sub;
-    public function __construct(GroupBuyingSubInterface $group_sub)
+    protected $group_service;
+    public function __construct(GroupBuyingSubInterface $group_sub,GroupBuyingService $group_service)
     {
         $this->config=config('pay.alipay');
         $this->group_sub=$group_sub;
+        $this->group_service=$group_service;
     }
 
     public function index(Request $request)
@@ -54,6 +57,10 @@ class AliPayController extends Controller
     {
        $alipay=Pay::alipay($this->config);
        try{
+           $data=$alipay->verify();
+           if ($this->group_sub->where(['order_id','=',$data->out_trade_no])->findByWhere()){
+
+           }
 
        }catch (Exception $exception){
 
