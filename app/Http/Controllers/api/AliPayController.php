@@ -32,7 +32,7 @@ class AliPayController extends Controller
         if ($validate->fails()){
             return response()->json($validate->errors(),403);
         }
-        $group_sub=$this->group_sub->where(['order_id','=',$request->get('order_id')])->findByWhere();
+        $group_sub=$this->group_sub->where([['order_id','=',$request->get('order_id')]])->findByWhere();
         if (!$group_sub){
             return response()->json("订单不存在",403);
         }
@@ -58,8 +58,8 @@ class AliPayController extends Controller
        $alipay=Pay::alipay($this->config);
        try{
            $data=$alipay->verify();
-           if ($this->group_sub->where(['order_id','=',$data->out_trade_no])->findByWhere()){
-
+           if ($this->group_sub->where([['order_id','=',$data->out_trade_no]])->findByWhere()){
+               $result=$this->group_service->createGroupToOrder($data->out_trade_no,$data->trade_no,1);
            }
 
        }catch (Exception $exception){

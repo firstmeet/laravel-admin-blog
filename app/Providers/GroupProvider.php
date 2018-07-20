@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Repositories\AuthUserInterface;
+use App\Repositories\AuthUserRepository;
 use App\Repositories\GoodsInterface;
 use App\Repositories\GoodsRepository;
 use App\Repositories\GroupBuyingInterface;
@@ -32,5 +34,6 @@ class GroupProvider extends ServiceProvider
         $this->app->bind(GroupBuyingInterface::class,GroupBuyingRepository::class);
         $this->app->bind(GroupBuyingSubInterface::class,GroupBuyingSubRepository::class);
         $this->app->bind(GoodsInterface::class,GoodsRepository::class);
+        $this->app->bind(AuthUserInterface::class,AuthUserRepository::class);
     }
 }

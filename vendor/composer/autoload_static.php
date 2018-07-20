@@ -497,6 +497,7 @@ class ComposerStaticInit1f371a7bb1a88f9f2a9d7308d4f8708e
         'App\\SkuSpecGroup' => __DIR__ . '/../..' . '/app/SkuSpecGroup.php',
         'App\\Stock' => __DIR__ . '/../..' . '/app/Stock.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
+        'App\\UserAuth' => __DIR__ . '/../..' . '/app/UserAuth.php',
         'Carbon\\Carbon' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Carbon.php',
         'Carbon\\CarbonInterval' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/CarbonInterval.php',
         'Carbon\\Exceptions\\InvalidDateException' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Exceptions/InvalidDateException.php',

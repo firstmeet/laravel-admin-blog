@@ -66,6 +66,7 @@ return array(
     'App\\SkuSpecGroup' => $baseDir . '/app/SkuSpecGroup.php',
     'App\\Stock' => $baseDir . '/app/Stock.php',
     'App\\User' => $baseDir . '/app/User.php',
+    'App\\UserAuth' => $baseDir . '/app/UserAuth.php',
     'Carbon\\Carbon' => $vendorDir . '/nesbot/carbon/src/Carbon/Carbon.php',
     'Carbon\\CarbonInterval' => $vendorDir . '/nesbot/carbon/src/Carbon/CarbonInterval.php',
     'Carbon\\Exceptions\\InvalidDateException' => $vendorDir . '/nesbot/carbon/src/Carbon/Exceptions/InvalidDateException.php',
