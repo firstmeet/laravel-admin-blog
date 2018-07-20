@@ -43,7 +43,7 @@ class WechatPayController extends Controller
             'total_fee'=>$group_sub->payment_amount,
             'body'=>'拼团:'.$request->get('order_id'),
             'spbill_create_ip' => $request->getClientIp()??'127.0.0.1',
-            'openid'=>
+            'openid'=>1
         ];
         switch ($request->get('type')){
             case 'mp':
