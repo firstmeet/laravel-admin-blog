@@ -25,8 +25,8 @@ class GroupBuyingController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header('拼团');
+            $content->description('拼团列表');
 
             $content->body($this->grid());
         });

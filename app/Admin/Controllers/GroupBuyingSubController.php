@@ -27,8 +27,8 @@ class GroupBuyingSubController extends Controller
         $group_id=$request->get('group_id');
         return Admin::content(function (Content $content)use($group_id) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header('拼团详情');
+            $content->description('拼团详情');
 
             $content->body($this->grid($group_id));
         });

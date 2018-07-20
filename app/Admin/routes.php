@@ -20,4 +20,6 @@ Route::group([
     $router->resource('sku',SkuController::class);
     $router->resource('group_buying',GroupbuyingController::class);
     $router->resource('group_buying_sub',GroupbuyingSubController::class);
+    $router->resource('order',OrderController::class);
+    $router->resource('order_detail',OrderDetailController::class);
 });

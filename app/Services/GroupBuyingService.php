@@ -105,8 +105,8 @@ class GroupBuyingService
     {
         $group_sub=GroupBuyingSub::with(['group'=>function($query){
             $query->with('goods');
-        }])->where('order_id',$order_id)->find();
-        $sku=Sku::where('sku_id',$group_sub->group->sku_id)->find();
+        }])->where('order_id',$order_id)->first();
+        $sku=Sku::where('sku_id','=',$group_sub->sku_id)->first();
         $order_data=[
             'order_id'=>$order_id,
             'user_id'=>$group_sub->user_id,

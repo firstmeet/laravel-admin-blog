@@ -42,10 +42,10 @@ class WechatPayController extends Controller
         }
         $user=Auth::user();
         $mp=$this->auth->where([['identify_type','=','mp'],['user_id','=',$user->id]])->findByWhere();
-        $miniapp=$this->auth->where([['identify_type','=','miniapp'],['user_id','=',$user->id]])->findByWhere();
+        $miniapp=$this->auth->where([['identify_type','=','mini_app'],['user_id','=',$user->id]])->findByWhere();
         $order=[
             'out_trade_no'=>$request->get('order_id'),
-            'total_fee'=>$group_sub->payment_amount,
+            'total_fee'=>(int)$group_sub->payment_amount,
             'body'=>'拼团:'.$request->get('order_id'),
             'spbill_create_ip' => $request->getClientIp()??'127.0.0.1',
             'openid'=>$mp->identifier
@@ -69,9 +69,9 @@ class WechatPayController extends Controller
     {
         $alipay=Pay::alipay($this->config);
         try{
-            $data=$alipay->verify();
-            if ($this->group_sub->where([['order_id','=',$data->out_trade_no]])->findByWhere()){
-                $result=$this->group_service->createGroupToOrder($data->out_trade_no,$data->trade_no,1);
+//            $data=$alipay->verify();
+            if ($this->group_sub->where([['order_id','=',$request->get('out_trade_no')]])->findByWhere()){
+                $result=$this->group_service->createGroupToOrder($request->get('out_trade_no'),$request->trade_no,1);
             }
 
         }catch (Exception $exception){

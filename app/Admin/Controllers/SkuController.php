@@ -31,8 +31,8 @@ class SkuController extends Controller
     {
         return Admin::content(function (Content $content) {
 
-            $content->header('header');
-            $content->description('description');
+            $content->header('库存规格');
+            $content->description('库存规格列表');
 
             $content->body($this->grid());
         });
