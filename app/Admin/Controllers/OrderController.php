@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use App\Good;
 use App\Order;
 
 use Carbon\Carbon;
@@ -11,6 +12,7 @@ use Encore\Admin\Facades\Admin;
 use Encore\Admin\Layout\Content;
 use App\Http\Controllers\Controller;
 use Encore\Admin\Controllers\ModelForm;
+use Encore\Admin\Widgets\Box;
 
 class OrderController extends Controller
 {
@@ -77,20 +79,38 @@ class OrderController extends Controller
             $grid->id('ID')->sortable();
             $grid->order_id("订单号");
             $grid->type("类型")->display(function (){
-               switch ($this->type){
-                   case '1':
-                       return "拼团";
-                       break;
-                   case '2':
-                       return "单独购买";
-                       break;
-               }
+                switch ($this->type){
+                    case '1':
+                        return "拼团";
+                        break;
+                    case '2':
+                        return "单独购买";
+                        break;
+                }
             });
             $grid->order_detail("商品")->display(function ($order_detail){
                 $res=array_map(function ($detail){
-                    return "<span class='label label-info'>{$detail['goods_name']}</span>&nbsp;&nbsp;<span class='label label-info'>{$detail['sku_name']}</span> &nbsp;&nbsp;<span class='label label-info'>x{$detail['number']}</span>&nbsp;&nbsp;&nbsp;<span class='label label-info'>¥{$detail['price']}</span><br/>";
+                    $goods=Good::find($detail['goods_id']);
+                    return "<tr><td><img src='/uploads/{$goods->picture}' class='img-thumbnail\' alt='Cinque Terre' width='100' height='50'></td><td>{$detail['goods_name']}</td><td>{$detail['sku_name']}</td><td>{$detail['number']}</td><td>{$detail['price']}</td></tr>";
                 },$order_detail);
-                return join(' ',$res);
+                $join=join('',$res);
+                $html="<div class=\"table-responsive\">
+	<table class=\"table\">
+		<thead>
+			<tr style='color: #9f191f'>
+			<td>图片</td>
+			<td>商品名称</td>
+			<td>规格</td>
+			<td>数量</td>
+			<td>单价</td>
+			</tr>
+		</thead>
+		<tbody>".$join.
+                    "</tbody>
+</table>
+</div>";
+                return $html;
+//                return join(' ',$res);
             });
             $grid->payment_amount("支付金额");
             $grid->freight("运费");
@@ -141,6 +161,14 @@ class OrderController extends Controller
                         break;
                 }
             });
+            $grid->column("收货信息")->display(function (){
+                $html="<span class='label label-info'>地址:{$this->province_str}{$this->city_str}{$this->county_str}{$this->address}</span><br>
+                  <span class='label label-info'>收货人:{$this->consignee_name}</span><br>
+                  <span class='label label-info'>联系方式:{$this->phone_number}</span>";
+//                $box=new Box('收货信息',$html);
+//                echo $box;
+                return $html;
+            })->popover("left",'收货信息');
             $grid->payment_type("付款方式")->display(function (){
                 switch ($this->payment_type){
                     case '1':
@@ -155,6 +183,26 @@ class OrderController extends Controller
             $grid->actions(function ($action){
                 $action->disableDelete();
                 $action->disableEdit();
+            });
+            $grid->tools(function ($tools) {
+                $tools->batch(function ($batch) {
+                    $batch->disableDelete();
+                });
+            });
+            $grid->filter(function($filter){
+
+                // 去掉默认的id过滤器
+                $filter->disableIdFilter();
+
+                // 在这里添加字段过滤器
+                $filter->where(function ($query) {
+
+                    $query->where('order_id', '=', "{$this->input}")
+                        ->orWhere('phone_number', '=', "{$this->input}");
+
+                }, '请输入订单号或者手机号');
+                $filter->between('created_at',"时间范围")->datetime();
+
             });
         });
     }

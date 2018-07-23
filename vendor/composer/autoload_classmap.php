@@ -19,6 +19,8 @@ return array(
     'App\\Admin\\Controllers\\SkuSpecGroupController' => $baseDir . '/app/Admin/Controllers/SkuSpecGroupController.php',
     'App\\Admin\\Controllers\\StockController' => $baseDir . '/app/Admin/Controllers/StockController.php',
     'App\\Admin\\Controllers\\api\\SkuSpecGroupController' => $baseDir . '/app/Admin/Controllers/api/SkuSpecGroupController.php',
+    'App\\Admin\\Extensions\\Modal' => $baseDir . '/app/Admin/Extensions/Modal.php',
+    'App\\Admin\\Extensions\\Popover' => $baseDir . '/app/Admin/Extensions/Popover.php',
     'App\\Admin\\Extensions\\WangEditor' => $baseDir . '/app/Admin/Extensions/WangEditor.php',
     'App\\City' => $baseDir . '/app/City.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',

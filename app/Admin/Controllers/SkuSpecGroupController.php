@@ -76,6 +76,11 @@ class SkuSpecGroupController extends Controller
             $grid->id('ID')->sortable();
             $grid->name("规格组名称")->editable();
             $grid->sort("排序")->editable();
+            $grid->type("类型")->radio([
+                1=>'文本',
+                2=>'颜色',
+                3=>'图片'
+            ]);
             $grid->status("状态")->radio([
                 1=>'未启用',
                 2=>'启用'
@@ -96,12 +101,12 @@ class SkuSpecGroupController extends Controller
 
             $form->display('id', 'ID');
             $form->text('name',"规格组名称");
+            $form->select("type","类型")->options([1=>'文本',2=>'颜色',3=>'图片']);
             $form->number('sort',"排序");
             $form->radio('status')->options([
                 1=>'未启用',
                 2=>'启用'
             ])->default(2);
-
             $form->display('created_at', 'Created At');
             $form->display('updated_at', 'Updated At');
         });

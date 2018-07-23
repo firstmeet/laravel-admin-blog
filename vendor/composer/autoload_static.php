@@ -450,6 +450,8 @@ class ComposerStaticInit1f371a7bb1a88f9f2a9d7308d4f8708e
         'App\\Admin\\Controllers\\SkuSpecGroupController' => __DIR__ . '/../..' . '/app/Admin/Controllers/SkuSpecGroupController.php',
         'App\\Admin\\Controllers\\StockController' => __DIR__ . '/../..' . '/app/Admin/Controllers/StockController.php',
         'App\\Admin\\Controllers\\api\\SkuSpecGroupController' => __DIR__ . '/../..' . '/app/Admin/Controllers/api/SkuSpecGroupController.php',
+        'App\\Admin\\Extensions\\Modal' => __DIR__ . '/../..' . '/app/Admin/Extensions/Modal.php',
+        'App\\Admin\\Extensions\\Popover' => __DIR__ . '/../..' . '/app/Admin/Extensions/Popover.php',
         'App\\Admin\\Extensions\\WangEditor' => __DIR__ . '/../..' . '/app/Admin/Extensions/WangEditor.php',
         'App\\City' => __DIR__ . '/../..' . '/app/City.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',

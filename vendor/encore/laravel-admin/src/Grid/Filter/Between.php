@@ -21,7 +21,6 @@ class Between extends AbstractFilter
     public function formatId($column)
     {
         $id = str_replace('.', '_', $column);
-
         return ['start' => "{$id}_start", 'end' => "{$id}_end"];
     }
 

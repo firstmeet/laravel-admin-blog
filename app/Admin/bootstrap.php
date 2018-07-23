@@ -21,3 +21,5 @@ use App\Admin\Extensions\WangEditor;
 use Encore\Admin\Form;
 Form::forget(['map', 'editor']);
 Form::extend('editor', WangEditor::class);
+\Encore\Admin\Grid\Column::extend('popover', \App\Admin\Extensions\Popover::class);
+\Encore\Admin\Grid\Column::extend('modal',\App\Admin\Extensions\Modal::class);
