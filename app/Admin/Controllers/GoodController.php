@@ -109,29 +109,38 @@ class GoodController extends Controller
     protected function form()
     {
         return Admin::form(Good::class, function (Form $form) {
+            $form->tab("商品基本信息",function ($form){
 
-            $form->display('id', 'ID');
-            $form->text('goods_name','商品名称')->rules("required",[
-                "required"=>'请输入商品价格'
-            ]);
-            $form->textarea("description",'商品描述')->rules("required",[
-                "required"=>'请输入商品描述'
-            ]);
-            $form->number('stock_number','库存数量')->rules("required",[
-                "required"=>'请输入库存数量'
-            ]);
-            $spec_groups_options=SkuSpecGroup::whereStatus(2)->pluck('name','id');
-            $form->checkbox('spec_groups',"选择需要的规格组")->options($spec_groups_options)->stacked();
-            $form->text('active_price','拼团价格');
-            $form->text('single_price','单独购买价格');
-            $form->number('active_man_number','拼团人数');
-            $form->datetime('start_time','开始时间');
-            $form->datetime('end_time','结束时间');
-            $form->number("active_valid_hours",'有效时间');
-            $form->number('can_active_number','可开团数量');
-            $form->image('picture','封面');
-            $form->multipleImage('pictures','详情轮播图')->removable();
-            $form->editor("content",'内容');
+                $form->display('id', 'ID');
+                $form->text('goods_name','商品名称')->rules("required",[
+                    "required"=>'请输入商品价格'
+                ]);
+                $form->textarea("description",'商品描述')->rules("required",[
+                    "required"=>'请输入商品描述'
+                ]);
+                $form->number('stock_number','库存数量')->rules("required",[
+                    "required"=>'请输入库存数量'
+                ]);
+                $form->text('active_price','拼团价格');
+                $form->text('single_price','单独购买价格');
+                $form->number('active_man_number','拼团人数');
+                $form->datetime('start_time','开始时间');
+                $form->datetime('end_time','结束时间');
+                $form->number("active_valid_hours",'有效时间');
+                $form->number('can_active_number','可开团数量');
+            });
+             $form->tab("库存",function ($form){
+                 $spec_groups_options=SkuSpecGroup::whereStatus(2)->pluck('name','id');
+                 $form->multipleSelect('spec_groups',"选择需要的规格组")->options($spec_groups_options);
+             });
+
+
+            $form->tab("商品内容和图片",function ($form){
+                $form->image('picture','封面');
+                $form->multipleImage('pictures','详情轮播图')->removable();
+                $form->editor("content",'内容');
+            });
+
             $form->number('sort');
             $form->radio('status','状态')->options([1=>'禁用',2=>'启用'])->default(1);
         });

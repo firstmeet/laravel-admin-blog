@@ -16,6 +16,7 @@ Route::group([
     $router->resource('sku_spec',SkuSpecController::class);
     $router->group(['prefix'=>'api','namespace'=>'api'],function(Router $router){
         $router->get('/spec_group','SkuSpecGroupController@index');
+        $router->get('/sku','SkuSpecGroupController@sku');
     });
     $router->resource('sku',SkuController::class);
     $router->resource('group_buying',GroupbuyingController::class);

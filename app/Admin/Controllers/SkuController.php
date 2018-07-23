@@ -7,6 +7,7 @@ use App\Sku;
 
 use App\SkuSpec;
 use App\SkuSpecGroup;
+use function Couchbase\defaultDecoder;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Facades\Admin;
@@ -115,7 +116,7 @@ class SkuController extends Controller
                 $options=SkuSpec::whereIn('id',$good->spec_groups)->pluck('name','id');
             }
 
-            $form->listbox("sku",'SKU')->options($options)->rules("required",[
+            $form->multipleSelect("spec",'规格')->options($options)->rules("required",[
                 "required"=>'请选择规格'
             ]);
 
@@ -133,6 +134,7 @@ class SkuController extends Controller
                 "numeric"=>'输入类型错误，请输入数字'
             ]);
             $form->number("stock_number","库存数量");
+            $form->hidden("sku");
 
             $form->display('created_at', 'Created At');
             $form->display('updated_at', 'Updated At');
@@ -142,8 +144,9 @@ class SkuController extends Controller
 
             });
             $form->saving(function (Form $form){
-                if ($form->sku){
-                    $sku=array_filter($form->sku);
+
+                if ($form->spec){
+                    $sku=array_filter($form->spec);
                     $goods_id=$form->goods_id;
                     $goods=Good::find($goods_id);
                     if (count($goods->spec_groups)!=count($sku)){
@@ -168,6 +171,14 @@ class SkuController extends Controller
 
                         return back()->with(compact('error'));
                     }
+                    $arr=[];
+
+                    foreach (array_filter($form->spec) as $key=>$value){
+                        $sku_spec=SkuSpec::find($value);
+                        $str=$sku_spec->sku_spec_group_id.':'.$value;
+                        array_push($arr,$str);
+                    }
+                    $form->sku=json_encode($arr);
                 }
 
             });

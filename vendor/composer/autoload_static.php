@@ -485,6 +485,8 @@ class ComposerStaticInit1f371a7bb1a88f9f2a9d7308d4f8708e
         'App\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EventServiceProvider.php',
         'App\\Providers\\GroupProvider' => __DIR__ . '/../..' . '/app/Providers/GroupProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
+        'App\\Repositories\\AuthUserInterface' => __DIR__ . '/../..' . '/app/Repositories/AuthUserInterface.php',
+        'App\\Repositories\\AuthUserRepository' => __DIR__ . '/../..' . '/app/Repositories/AuthUserRepository.php',
         'App\\Repositories\\GoodsInterface' => __DIR__ . '/../..' . '/app/Repositories/GoodsInterface.php',
         'App\\Repositories\\GoodsRepository' => __DIR__ . '/../..' . '/app/Repositories/GoodsRepository.php',
         'App\\Repositories\\GroupBuyingInterface' => __DIR__ . '/../..' . '/app/Repositories/GroupBuyingInterface.php',

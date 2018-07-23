@@ -54,6 +54,8 @@ return array(
     'App\\Providers\\EventServiceProvider' => $baseDir . '/app/Providers/EventServiceProvider.php',
     'App\\Providers\\GroupProvider' => $baseDir . '/app/Providers/GroupProvider.php',
     'App\\Providers\\RouteServiceProvider' => $baseDir . '/app/Providers/RouteServiceProvider.php',
+    'App\\Repositories\\AuthUserInterface' => $baseDir . '/app/Repositories/AuthUserInterface.php',
+    'App\\Repositories\\AuthUserRepository' => $baseDir . '/app/Repositories/AuthUserRepository.php',
     'App\\Repositories\\GoodsInterface' => $baseDir . '/app/Repositories/GoodsInterface.php',
     'App\\Repositories\\GoodsRepository' => $baseDir . '/app/Repositories/GoodsRepository.php',
     'App\\Repositories\\GroupBuyingInterface' => $baseDir . '/app/Repositories/GroupBuyingInterface.php',
