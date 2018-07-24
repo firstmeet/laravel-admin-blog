@@ -14,12 +14,28 @@ use Encore\Admin\Grid\Tools\AbstractTool;
 
 class NewSku extends AbstractTool
 {
+    protected $goods_id;
+    public function __construct($goods_id)
+    {
+        $this->goods_id=$goods_id;
+    }
+
     protected function script()
     {
         return <<<EOT
-$("button:new_sku").click(function(){
-
-  console.log(1);
+$(".new_sku").click(function(){
+         $.ajax({
+        method: 'post',
+        url: '/admin/sku/task/new_sku',
+        data: {
+            _token:LA.token,
+            goods_id:{$this->goods_id}
+        },
+        success: function () {
+            $.pjax.reload('#pjax-container');
+            toastr.success('操作成功');
+        }
+    });
 })
        
 EOT;
@@ -27,6 +43,6 @@ EOT;
     public function render()
     {
        Admin::script($this->script());
-       return view('admin.tools.new_sku')
+       return view('admin.tools.new_sku');
     }
 }

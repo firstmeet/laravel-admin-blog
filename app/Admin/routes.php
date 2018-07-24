@@ -19,6 +19,7 @@ Route::group([
         $router->get('/sku','SkuSpecGroupController@sku');
     });
     $router->resource('sku',SkuController::class);
+    $router->post('/sku/task/new_sku','SkuController@new_sku');
     $router->resource('group_buying',GroupbuyingController::class);
     $router->resource('group_buying_sub',GroupbuyingSubController::class);
     $router->resource('order',OrderController::class);

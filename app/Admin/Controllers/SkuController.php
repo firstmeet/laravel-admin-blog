@@ -4,6 +4,7 @@ namespace App\Admin\Controllers;
 
 use App\Admin\Extensions\Tools\NewSku;
 use App\Good;
+use App\Services\GroupBuyingService;
 use App\Sku;
 
 use App\SkuSpec;
@@ -97,7 +98,7 @@ class SkuController extends Controller
                 $actions->prepend('<a href="'.\url('admin/sku/'.$actions->getKey().'/edit?goods_id='.\Illuminate\Support\Facades\Request::get('goods_id')).'"><i class="fa fa-edit"></i></a>');
             });
             $grid->tools(function ($tools) {
-                $tools->append(new NewSku());
+                $tools->append(new NewSku(\Illuminate\Support\Facades\Request::get('goods_id')));
             });
         });
     }
@@ -155,4 +156,30 @@ class SkuController extends Controller
             });
         });
     }
+    public function new_sku(Request $request)
+    {
+        $goods_id=$request->goods_id;
+        $service=new GroupBuyingService();
+        $arr=[];
+        $goods=Good::find($goods_id);
+        foreach ($goods->spec_groups as $key=>$v){
+            $spec=SkuSpec::where('sku_spec_group_id',$v)->get()->toArray();
+            $arr1=array_column($spec,'id');
+            array_push($arr,$arr1);
+        }
+        $list=$service->getArrSet($arr);
+        $arr2=[];
+        foreach ($list as $key=>$value){
+            $arr=[];
+            foreach ($value as $k=>$v){
+                $spec=SkuSpec::find($v);
+                $arr[$spec->sku_spec_group_id]=$v;
+            }
+
+        }
+
+
+
+    }
+
 }
