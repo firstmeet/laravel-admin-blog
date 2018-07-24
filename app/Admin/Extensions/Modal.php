@@ -7,7 +7,7 @@ use Encore\Admin\Grid\Displayers\AbstractDisplayer;
 
 class Modal extends AbstractDisplayer
 {
-    public function display($placement = 'left',$title='',$button='')
+    public function display($title='',$button='')
     {
 //        Admin::script("$('[data-toggle=\"modal\"]').modal()");
 

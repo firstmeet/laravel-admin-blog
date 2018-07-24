@@ -13,6 +13,7 @@ use Encore\Admin\Layout\Content;
 use App\Http\Controllers\Controller;
 use Encore\Admin\Controllers\ModelForm;
 use Encore\Admin\Widgets\Box;
+use function foo\func;
 
 class OrderController extends Controller
 {
@@ -161,6 +162,23 @@ class OrderController extends Controller
                         break;
                 }
             });
+            $grid->column("物流信息")->display(function(){
+                $html="<ul class=\"list-group\">
+	<li class=\"list-group-item\">免费域名注册</li>
+	<li class=\"list-group-item\">免费 Window 空间托管</li>
+	<li class=\"list-group-item\">图像的数量</li>
+	<li class=\"list-group-item\">
+		<span class=\"badge\">新</span>
+		24*7 支持
+	</li>
+	<li class=\"list-group-item\">每年更新成本</li>
+	<li class=\"list-group-item\">
+		<span class=\"badge\">新</span>
+		折扣优惠
+	</li>
+</ul>";
+                return $html;
+            })->modal("物流信息",'物流信息');
             $grid->column("收货信息")->display(function (){
                 $html="<span class='label label-info'>地址:{$this->province_str}{$this->city_str}{$this->county_str}{$this->address}</span><br>
                   <span class='label label-info'>收货人:{$this->consignee_name}</span><br>

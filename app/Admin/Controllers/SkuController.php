@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use App\Admin\Extensions\Tools\NewSku;
 use App\Good;
 use App\Sku;
 
@@ -85,7 +86,7 @@ class SkuController extends Controller
             $grid->model()->where('goods_id',\Illuminate\Support\Facades\Request::get('goods_id'));
             $grid->id('ID')->sortable();
             $grid->sku_id('SKU_ID');
-            $grid->sku('所选规格');
+            $grid->sku_change('所选规格');
             $grid->stock_number("库存数量");
             $grid->active_price('拼团价')->editable();
             $grid->group_price("团长价")->editable();
@@ -94,6 +95,9 @@ class SkuController extends Controller
             $grid->actions(function ($actions){
                 $actions->disableEdit();
                 $actions->prepend('<a href="'.\url('admin/sku/'.$actions->getKey().'/edit?goods_id='.\Illuminate\Support\Facades\Request::get('goods_id')).'"><i class="fa fa-edit"></i></a>');
+            });
+            $grid->tools(function ($tools) {
+                $tools->append(new NewSku());
             });
         });
     }
@@ -107,7 +111,7 @@ class SkuController extends Controller
     {
         return Admin::form(Sku::class, function (Form $form) {
             $goods_id=\Illuminate\Support\Facades\Request::get('goods_id');
-            $form->display('id', 'ID');
+            $form->hidden('id', 'ID');
             $form->hidden('goods_id',"GOODS_ID")->value($goods_id);
             $form->hidden('sku_id','SKU_ID')->value(Uuid::uuid());
             $options=[];
@@ -115,7 +119,7 @@ class SkuController extends Controller
                 $good=Good::find($goods_id);
                 $options=SkuSpec::whereIn('id',$good->spec_groups)->pluck('name','id');
             }
-            $form->embeds('sku',function ($form)use ($goods_id){
+            $form->embeds('sku','规格',function ($form)use ($goods_id){
                 $spec_group=Good::find($goods_id);
                 foreach ($spec_group->spec_groups as $key=>$value){
                     $group=SkuSpecGroup::find($value);
