@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Sku extends Model
 {
     protected $guarded=[];
+    protected $casts = [
+        'sku' => 'json',
+    ];
 //    public function setSkuAttribute($sku)
 //    {
 //        if (is_array($this->spec)) {
@@ -43,5 +46,9 @@ class Sku extends Model
     public function getSpecAttribute($spec)
     {
         return json_decode($spec);
+    }
+    public function spec()
+    {
+        return $this->hasMany(SkuSpec::class);
     }
 }

@@ -85,6 +85,9 @@ class SkuSpecGroupController extends Controller
                 1=>'未启用',
                 2=>'启用'
             ]);
+            $grid->actions(function ($actions){
+                $actions->append('<a href='.url('admin/sku_spec?group_id='.$actions->getKey()).' title="规格"><i class="fa fa-anchor"></i></a>');
+            });
             $grid->created_at();
             $grid->updated_at();
         });

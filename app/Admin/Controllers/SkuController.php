@@ -115,11 +115,13 @@ class SkuController extends Controller
                 $good=Good::find($goods_id);
                 $options=SkuSpec::whereIn('id',$good->spec_groups)->pluck('name','id');
             }
-
-            $form->multipleSelect("spec",'规格')->options($options)->rules("required",[
-                "required"=>'请选择规格'
-            ]);
-
+            $form->embeds('sku',function ($form)use ($goods_id){
+                $spec_group=Good::find($goods_id);
+                foreach ($spec_group->spec_groups as $key=>$value){
+                    $group=SkuSpecGroup::find($value);
+                    $form->radio($group->id,$group->name)->options($group->sku_spec->pluck('name','id'));
+                }
+            });
             $form->text('active_price','拼团价格')->rules("required|numeric",[
                 "required"=>'请输入拼团价格',
                 "numeric"=>'输入类型错误，请输入数字'
@@ -134,52 +136,11 @@ class SkuController extends Controller
                 "numeric"=>'输入类型错误，请输入数字'
             ]);
             $form->number("stock_number","库存数量");
-            $form->hidden("sku");
-
             $form->display('created_at', 'Created At');
             $form->display('updated_at', 'Updated At');
             $form->tools(function (Form\Tools $tools) {
                 // 去掉跳转列表按钮
                 $tools->disableListButton();
-
-            });
-            $form->saving(function (Form $form){
-
-                if ($form->spec){
-                    $sku=array_filter($form->spec);
-                    $goods_id=$form->goods_id;
-                    $goods=Good::find($goods_id);
-                    if (count($goods->spec_groups)!=count($sku)){
-                        $error = new MessageBag([
-                            'title'   => '规格错误',
-                            'message' => '选择规格数量错误,共有'.count($goods->spec_groups).'个规格组,已选择'.count($sku).'个',
-                        ]);
-
-                        return back()->with(compact('error'));
-                    }
-                    $arr=[];
-                    foreach ($sku as $key=>$value){
-                        $sku_spec=SkuSpec::find($value);
-                        array_push($arr,$sku_spec->sku_spec_group_id);
-                    }
-
-                    if (count($sku)!=count(array_unique($arr))){
-                        $error = new MessageBag([
-                            'title'   => '规格错误',
-                            'message' => '不能选择相同规格组的规格',
-                        ]);
-
-                        return back()->with(compact('error'));
-                    }
-                    $arr=[];
-
-                    foreach (array_filter($form->spec) as $key=>$value){
-                        $sku_spec=SkuSpec::find($value);
-                        $str=$sku_spec->sku_spec_group_id.':'.$value;
-                        array_push($arr,$str);
-                    }
-                    $form->sku=json_encode($arr);
-                }
 
             });
             $form->saved(function (Form $form) {

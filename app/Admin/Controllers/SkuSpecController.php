@@ -75,10 +75,16 @@ class SkuSpecController extends Controller
     {
 
         return Admin::grid(SkuSpec::class, function (Grid $grid) {
+            $group_id=\Illuminate\Support\Facades\Request::get('group_id');
+            $grid->model()->where('sku_spec_group_id',$group_id);
             $grid->id('ID')->sortable();
             $grid->name("规格名称")->editable();
             $grid->sku_spec_group_id("所属规格组")->display(function ($sku_spec_group_id){
                 return SkuSpecGroup::find($sku_spec_group_id)->name;
+            });
+            $grid->actions(function ($actions){
+                $actions->disableEdit();
+                $actions->append('<a href='.url('admin/sku_spec/'.$actions->getKey().'/edit?group_id='.\Illuminate\Support\Facades\Request::get('group_id')).'><i class="fa fa-edit"></i></a>');
             });
             $grid->created_at();
             $grid->updated_at();
@@ -93,10 +99,38 @@ class SkuSpecController extends Controller
     protected function form()
     {
         return Admin::form(SkuSpec::class, function (Form $form) {
-
+            $group_id=\Illuminate\Support\Facades\Request::get('group_id');
             $form->display('id', 'ID');
+            $form->hidden("sku_spec_group_id")->value($group_id);
             $form->text("name",'规格名称');
-            $form->select('sku_spec_group_id','所属规格组')->options('/admin/api/spec_group');
+            if ($group_id){
+                $group=SkuSpecGroup::find($group_id);
+            }
+            if (isset($group)){
+                switch ($group->type){
+                    case 1:
+                        $form->text("value",'值');
+                        break;
+                    case 2:
+                        $form->color("value",'值');
+                        break;
+                    case 3:
+                        $form->image("value",'值')->removable();
+                        break;
+                }
+            }
+            $form->saved(function($form){
+                return redirect('/admin/sku_spec?group_id='.$form->sku_spec_group_id);
+            });
+            $form->setAction('/admin/sku_spec?group_id='.$group_id);
+            $form->tools(function (Form\Tools $tools) {
+
+
+                // 去掉跳转列表按钮
+                $tools->disableListButton();
+
+            });
+
         });
     }
 }
