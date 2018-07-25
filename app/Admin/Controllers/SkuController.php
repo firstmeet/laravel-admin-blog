@@ -88,7 +88,7 @@ class SkuController extends Controller
             $grid->id('ID')->sortable();
             $grid->sku_id('SKU_ID');
             $grid->sku_change('所选规格');
-            $grid->stock_number("库存数量");
+            $grid->stock_number("库存数量")->editable();
             $grid->active_price('拼团价')->editable();
             $grid->group_price("团长价")->editable();
             $grid->single_price('单独购买价')->editable();
@@ -175,9 +175,19 @@ class SkuController extends Controller
                 $spec=SkuSpec::find($v);
                 $arr[$spec->sku_spec_group_id]=$v;
             }
-
+            $data=[
+                'goods_id'=>$goods_id,
+                'sku'=>$arr,
+                'active_price'=>0,
+                'single_price'=>0,
+                'sale'=>0,
+                'sku_id'=>Uuid::uuid(),
+                'stock_number'=>0,
+                'group_price'=>0
+            ];
+            Sku::create($data);
         }
-
+       return response()->json(['msg'=>'success'],200);
 
 
     }
