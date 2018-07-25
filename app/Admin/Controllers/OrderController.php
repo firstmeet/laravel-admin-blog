@@ -238,6 +238,7 @@ class OrderController extends Controller
             $form->switch('is_ship');
             $form->switch('is_receipt');
             $form->display('created_at', 'Created At');
+            $form->hidden("ship_number");
             $form->hidden("ship_time");
             $form->hidden("receipt_time");
             $form->saving(function ($form){
