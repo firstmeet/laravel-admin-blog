@@ -55,14 +55,14 @@ class GroupBuyingSubRepository implements GroupBuyingSubInterface
     }
     public function getByWhere()
     {
-        if (!$this->where){
-            if (!$this->with){
+        if ($this->where){
+            if ($this->with){
                 return $this->model::with($this->with)->where($this->where)->get();
             }else{
                 return $this->model::where($this->where)->get();
             }
         }else{
-            throw new \Mockery\Exception("参数错误");
+            return $this->model::with($this->with)->get();
         }
     }
     public function getAll()
